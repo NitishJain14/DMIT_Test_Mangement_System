@@ -5,6 +5,8 @@ const rateLimit = require('express-rate-limit');
 const compression = require('compression');
 const path = require('path');
 require('dotenv').config();
+const db = require('./config/db'); // your current db.js
+
 
 // Routes
 const authRoutes = require('./routes/authRoutes');
@@ -51,6 +53,24 @@ app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/clients', clientRoutes);
 app.use('/api/remarks', remarkRoutes); // 👈 added here
+
+app.get('/dbcheck', (req, res) => {
+  db.ping(err => {
+    if (err) {
+      console.error('❌ Database connection failed:', err.message);
+      return res.status(500).json({
+        status: 'error',
+        message: 'Database connection failed',
+        error: err.message
+      });
+    }
+
+    res.json({
+      status: 'success',
+      message: 'Database connected successfully ✅'
+    });
+  });
+});
 
 // 404 Not Found handler
 app.use((req, res, next) => {
