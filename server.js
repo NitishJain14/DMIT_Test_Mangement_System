@@ -25,7 +25,7 @@ app.use(helmet());
 
 // CORS (adjust origin as needed)
 app.use(cors({
-  origin: process.env.CORS_ORIGIN || 'https://dmit-test-management-system.netlify.app/', // Explicit origin
+  origin: process.env.CORS_ORIGIN || 'https://dmit-test-management-system.netlify.app', // Explicit origin
   methods: ['GET', 'POST', 'PUT', 'DELETE, PATCH'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true // ✅ Allow credentials (cookies, auth headers)
