@@ -54,7 +54,7 @@ app.use('/api/users', userRoutes);
 app.use('/api/clients', clientRoutes);
 app.use('/api/remarks', remarkRoutes); // 👈 added here
 
-app.get('/dbcheck', (req, res) => {
+app.get('/', (req, res) => {
   db.ping(err => {
     if (err) {
       console.error('❌ Database connection failed:', err.message);
